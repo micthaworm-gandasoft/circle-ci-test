@@ -1,0 +1,30 @@
+version: 2.1
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-test:
+          filters:
+            branches:
+              only:
+              - "main"
+              - "master"
+      - run-test:
+          requires:
+          - build-test
+jobs:
+  build-test:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - run: echo "hey m running build test"
+  run-test:
+      docker:
+        - image: cimg/base:2021.04
+      steps:
+      - run: echo "here we go run the test######"
+    
+            
+
+                   
+      
